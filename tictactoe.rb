@@ -20,8 +20,8 @@ class Game
     #while game not over
     @board.display
     game_won = false
-    winner = 0
-    while !game_won # and board not filled
+    winner = nil
+    while !game_won && !@board.filled# and board not filled
       index += 1
       index = 0 if index == 2 
       move(@player[index])

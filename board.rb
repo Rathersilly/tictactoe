@@ -6,6 +6,7 @@ class Board
     #                [" | | "],
     #                ["-----"],
     #                [" | | "]]
+    @filled_squares = 0
     @move_array = Array.new(2)
     @game_array = Array.new(3){Array.new(3)}
     square = 1
@@ -43,6 +44,7 @@ class Board
 
     
     @game_array[row][col] = player.sigil
+    @filled_squares += 1
   end
 
   def win_status
@@ -79,6 +81,13 @@ class Board
     return false
   end
 
+  def filled
+    if @filled_squares  >= 9
+      return true
+    else
+      return false
+    end
+  end
 
   
 
