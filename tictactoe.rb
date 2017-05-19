@@ -1,10 +1,15 @@
+#TODO: add ai, sanitization
+#probably give each player a score after each move
+#score = number of available winning lines
+#eg p1: move(4) => p1=1
+#   p2: move(5) => p1=1, p2=3
+#   p1: move(8) => p1=2, p2=2
+#   p2: move(7) => p1=0, p2=2
+#maybe score needs to be array of possible lines with 1 or 2 sigils already placed
+
+
 require_relative 'board'
-#possible classes
-#board
-#player
-#game
-#
-#
+
 class Game
   @@games_played = 0
 
@@ -16,29 +21,28 @@ class Game
 
   def start
     puts "game started"
-    index = 1
-    #while game not over
+    current_player_index = 1
+    
     @board.display
     game_won = false
     winner = nil
-    while !game_won && !@board.filled# and board not filled
-      index += 1
-      index = 0 if index == 2 
-      move(@player[index])
+    while !game_won && !@board.filled
+      current_player_index += 1
+      current_player_index = 0 if current_player_index == 2 
+      move(@player[current_player_index])
       
       
       @board.display
       game_won = @board.win_status
       if game_won
-        winner = @player[index]
+        winner = @player[current_player_index]
       end
         
-       #find current player to move
+       
     end
 
     end_game(winner)
-    #get players move
-    #update board
+    
   end
 
   def move(player)
@@ -50,7 +54,6 @@ class Game
   def end_game(winner)
     puts "Game over!"
     if(winner)
-      
       puts "#{winner.name} won!"
     else
       puts "It's a tie!"
